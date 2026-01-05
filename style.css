@@ -3,11 +3,13 @@
       margin: 0;
       padding: 0;
       box-sizing: border-box;
+      scroll-behavior: smooth;
     }
 
     body {
+
       font-family: 'Space Grotesk', sans-serif;
-      background: #0a0e27;
+      background: #010314;
       color: #e0e6ed;
       overflow-x: hidden;
       position: relative;
