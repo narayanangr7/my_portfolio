@@ -9,7 +9,7 @@
     body {
 
       font-family: 'Space Grotesk', sans-serif;
-      background: #010314;
+      background:#141414;
       color: #e0e6ed;
       overflow-x: hidden;
       position: relative;
@@ -292,6 +292,23 @@
       transform: scaleX(0);
       transition: transform 0.4s ease;
     }
+    .project-link {
+  display: inline-block;
+  margin-top: 15px;
+  padding: 10px 16px;
+  background: #1d3038;
+  color: #e8ebf3;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+.project-link:hover {
+  background: #0ea5e9;
+  color: #ffffff;
+}
+
 
     .project-card:hover::after {
       transform: scaleX(1);

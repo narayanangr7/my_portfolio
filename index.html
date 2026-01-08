@@ -1,177 +1,763 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Narayanan G R | Portfolio</title>
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    />
-    <link rel="stylesheet" href="./style.css" />
-  </head>
-  <body>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #0a0a0a;
+            color: #e0e6ed;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Animated Background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(0, 245, 212, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255, 77, 109, 0.05) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Header */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 30px 0;
+            background: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(20px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid rgba(0, 245, 212, 0.1);
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #00f5d4, #00d9f5);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        nav {
+            display: flex;
+            gap: 35px;
+            align-items: center;
+        }
+
+        nav a {
+            color: #9ca3af;
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        nav a i {
+            font-size: 14px;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #00f5d4, #00d9f5);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #00f5d4;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 100px 0;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+            min-height: 90vh;
+        }
+
+        .hero-content h1 {
+            font-size: 72px;
+            font-weight: 800;
+            margin-bottom: 20px;
+            line-height: 1.1;
+            background: linear-gradient(135deg, #ffffff, #00f5d4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-content .subtitle {
+            font-size: 22px;
+            color: #9ca3af;
+            margin-bottom: 40px;
+            line-height: 1.7;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+        }
+
+        .btn {
+            padding: 16px 36px;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-secondary {
+            background: rgba(0, 245, 212, 0.1);
+            color: #00f5d4;
+            border: 2px solid rgba(0, 245, 212, 0.3);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(0, 245, 212, 0.2);
+            border-color: #00f5d4;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 245, 212, 0.3);
+        }
+
+        /* Hero Visual with Photo */
+        .hero-visual {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .profile-circle {
+            width: 450px;
+            height: 450px;
+            border-radius: 30px;
+            background: linear-gradient(135deg, rgba(0, 245, 212, 0.1), rgba(255, 77, 109, 0.1));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            border: 2px solid rgba(0, 245, 212, 0.2);
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 245, 212, 0.2);
+        }
+
+        .profile-circle img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 30px;
+        }
+
+        /* Floating decoration */
+        .profile-circle::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(135deg, transparent, rgba(0, 245, 212, 0.1));
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Sections */
+        section {
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            padding: 80px 60px;
+            margin: 80px 0;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            position: relative;
+            overflow: hidden;
+        }
+
+        section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, rgba(0, 245, 212, 0.5), transparent);
+        }
+
+        section h2 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        section h2 i {
+            color: #00f5d4;
+            font-size: 42px;
+        }
+
+        .section-subtitle {
+            color: #9ca3af;
+            font-size: 18px;
+            margin-bottom: 50px;
+        }
+
+        /* About Section */
+        #about p {
+            font-size: 18px;
+            line-height: 1.8;
+            color: #9ca3af;
+        }
+
+        /* Skills Grid */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 24px;
+            margin-top: 40px;
+        }
+
+        .skill-card {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 32px;
+            border-radius: 16px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .skill-card i {
+            font-size: 48px;
+            background: linear-gradient(135deg, #00f5d4, #00d9f5);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .skill-card:hover {
+            background: rgba(0, 245, 212, 0.05);
+            transform: translateY(-8px);
+            border-color: rgba(0, 245, 212, 0.3);
+            box-shadow: 0 20px 40px rgba(0, 245, 212, 0.15);
+        }
+
+        /* Projects Grid */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 32px;
+            margin-top: 40px;
+        }
+
+        .project-card {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            position: relative;
+        }
+
+        .project-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #00f5d4, #ff4d6d, #feca57);
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+
+        .project-card:hover::after {
+            transform: scaleX(1);
+        }
+
+        .project-card:hover {
+            transform: translateY(-12px);
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(0, 245, 212, 0.3);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .project-image-container {
+            width: 100%;
+            height: 280px;
+            overflow: hidden;
+            position: relative;
+            background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
+        }
+
+        .project-image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .project-card:hover .project-image-container img {
+            transform: scale(1.1);
+        }
+
+        .project-info {
+            padding: 30px;
+        }
+
+        .project-info h3 {
+            font-size: 24px;
+            margin-bottom: 12px;
+            color: #fff;
+        }
+
+        .project-info p {
+            font-size: 16px;
+            color: #9ca3af;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .project-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            background: rgba(0, 245, 212, 0.1);
+            color: #00f5d4;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0, 245, 212, 0.2);
+        }
+
+        .project-link:hover {
+            background: rgba(0, 245, 212, 0.2);
+            border-color: #00f5d4;
+            transform: translateX(5px);
+        }
+
+        /* ELS Life Skills Section */
+        .els-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .els-card {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.4s ease;
+            position: relative;
+        }
+
+        .els-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px rgba(0, 245, 212, 0.2);
+            border-color: rgba(0, 245, 212, 0.3);
+        }
+
+        .els-image-container {
+            width: 100%;
+            height: 300px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .els-image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .els-card:hover .els-image-container img {
+            transform: scale(1.05);
+        }
+
+        .els-info {
+            padding: 25px;
+            text-align: center;
+        }
+
+        .els-info h3 {
+            font-size: 20px;
+            margin-bottom: 8px;
+            color: #fff;
+        }
+
+        .els-info p {
+            color: #9ca3af;
+            font-size: 15px;
+        }
+
+        /* Education */
+        .education-list {
+            list-style: none;
+            margin-top: 40px;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .education-list li {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 32px;
+            border-radius: 16px;
+            border-left: 4px solid #00f5d4;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .education-list li i {
+            font-size: 36px;
+            color: #00f5d4;
+        }
+
+        .education-list li:hover {
+            background: rgba(0, 245, 212, 0.05);
+            transform: translateX(10px);
+        }
+
+        /* Contact */
+        .contact-links {
+            display: flex;
+            gap: 24px;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+
+        .contact-links a {
+            color: #e0e6ed;
+            text-decoration: none;
+            font-size: 16px;
+            padding: 18px 32px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 500;
+        }
+
+        .contact-links a i {
+            font-size: 20px;
+            color: #00f5d4;
+        }
+
+        .contact-links a:hover {
+            background: rgba(0, 245, 212, 0.1);
+            border-color: rgba(0, 245, 212, 0.3);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(0, 245, 212, 0.2);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .hero {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 60px;
+            }
+
+            .profile-circle {
+                width: 350px;
+                height: 350px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 24px;
+            }
+
+            header {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            nav {
+                gap: 20px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .hero-content h1 {
+                font-size: 48px;
+            }
+
+            section {
+                padding: 50px 30px;
+            }
+
+            section h2 {
+                font-size: 36px;
+            }
+
+            .projects-grid,
+            .els-gallery {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
     <div class="container">
-      <!-- Header -->
-      <header>
-        <div class="logo">Narayanan</div>
-        <nav>
-          <a href="#home"><i class="fas fa-home"></i> Home</a>
-          <a href="#about"><i class="fas fa-user"></i> About</a>
-          <a href="#skills"><i class="fas fa-brain"></i> Skills</a>
-          <a href="#projects"><i class="fas fa-folder-open"></i> Projects</a>
-          <a href="#education"
-            ><i class="fas fa-graduation-cap"></i> Education</a
-          >
-          <a href="#contact"><i class="fas fa-envelope"></i> Contact</a>
-        </nav>
-      </header>
+        <!-- Header -->
+        <header>
+            <div class="logo">Narayanan G R</div>
+            <nav>
+                <a href="#home"><i class="fas fa-home"></i> Home</a>
+                <a href="#about"><i class="fas fa-user"></i> About</a>
+                <a href="#skills"><i class="fas fa-brain"></i> Skills</a>
+                <a href="#projects"><i class="fas fa-folder-open"></i> Projects</a>
+                <a href="#els"><i class="fas fa-users"></i> ELS</a>
+                <a href="#contact"><i class="fas fa-envelope"></i> Contact</a>
+            </nav>
+        </header>
 
-      <!-- Hero Section -->
-      <div class="hero" id="home">
-        <div class="hero-content">
-          <h1>Narayanan G R</h1>
-          <p class="subtitle">
-            Full-Stack Developer crafting innovative web solutions with modern
-            technologies. Passionate about clean code and exceptional user
-            experiences.
-          </p>
-          <div class="cta-buttons">
-            <a href="#contact" class="btn btn-secondary">
-              <i class="fas fa-paper-plane"></i>
-              Get In Touch
-            </a>
-          </div>
-        </div>
-        <div class="hero-visual">
-          <div class="profile-circle">
-            <img
-              src="./WhatsApp Image 2025-11-14 at 5.14.16 PM.jpeg"
-              alt="Narayanan G R"
-            />
-          </div>
-        </div>
-      </div>
-
-      <!-- About Section -->
-      <section id="about">
-        <h2><i class="fas fa-user-circle"></i> About Me</h2>
-        <p class="section-subtitle">
-          Get to know more about my journey and aspirations
-        </p>
-        <p style="font-size: 18px; line-height: 1.8; color: #9ca3af">
-          I have completed my 12th grade and am currently pursuing Full-Stack
-          Development at Freshworks STS Software Academy. Passionate about
-          creating innovative web solutions, learning cutting-edge technologies,
-          and building applications that make a difference. I believe in
-          continuous growth and pushing the boundaries of what's possible with
-          code.
-        </p>
-      </section>
-
-      <!-- Skills Section -->
-      <section id="skills">
-        <h2><i class="fas fa-layer-group"></i> Skills & Technologies</h2>
-        <p class="section-subtitle">Tools and technologies I work with</p>
-        <div class="skills-grid">
-          <div class="skill-card">
-            <i class="fab fa-html5"></i>
-            <span>HTML5</span>
-          </div>
-          <div class="skill-card">
-            <i class="fab fa-css3-alt"></i>
-            <span>CSS3</span>
-          </div>
-          <div class="skill-card">
-            <i class="fab fa-js"></i>
-            <span>JavaScript</span>
-          </div>
-          <div class="skill-card">
-            <i class="fab fa-python"></i>
-            <span>Python</span>
-          </div>
-          <div class="skill-card">
-            <i class="fas fa-bolt"></i>
-            <span>FastAPI</span>
-          </div>
-          <div class="skill-card">
-            <i class="fas fa-database"></i>
-            <span>PostgreSQL</span>
-          </div>
-        </div>
-      </section>
-
-      <!-- Projects Section -->
-      <section id="projects">
-        <h2><i class="fas fa-rocket"></i> Featured Projects</h2>
-        <p class="section-subtitle">
-          Showcasing my recent work and accomplishments
-        </p>
-        <div class="projects-grid">
-          <div class="project-card">
-            <div class="project-icon">
-              <i class="fas fa-shopping-cart"></i>
+        <!-- Hero Section -->
+        <div class="hero" id="home">
+            <div class="hero-content">
+                <h1>Narayanan G R</h1>
+                <p class="subtitle">
+                    Full-Stack Developer crafting innovative web solutions with modern technologies. Passionate about clean code and exceptional user experiences.
+                </p>
+                <div class="cta-buttons">
+                    <a href="#contact" class="btn btn-secondary">
+                        <i class="fas fa-paper-plane"></i>
+                        Get In Touch
+                    </a>
+                </div>
             </div>
-            <h3>Static Website</h3>
+            <div class="hero-visual">
+                <div class="profile-circle">
+                    <!-- REPLACE WITH YOUR PROFILE PHOTO -->
+                    <img src="./DSC00747 (2).jpg" alt="Narayanan G R">
+                </div>
+            </div>
+        </div>
+
+        <!-- About Section -->
+        <section id="about">
+            <h2><i class="fas fa-user-circle"></i> About Me</h2>
+            <p class="section-subtitle">Get to know more about my journey and aspirations</p>
             <p>
-              Designed and developed a static landing page using HTML and CSS
-              Created clean layouts and user-friendly design Focused on
-              responsiveness and readability
+                I have completed my 12th grade and am currently pursuing Full-Stack Development at Freshworks STS Software Academy. Passionate about creating innovative web solutions, learning cutting-edge technologies, and building applications that make a difference. I believe in continuous growth and pushing the boundaries of what's possible with code.
             </p>
-          </div>
-        </div>
-      </section>
+        </section>
 
-      <section id="education">
-        <h2><i class="fas fa-book-open"></i> Education</h2>
-        <p class="section-subtitle">My academic journey and certifications</p>
-        <ul class="education-list">
-          <li>
-            <i class="fas fa-certificate"></i>
-            <div>
-              <strong
-                style="font-size: 18px; display: block; margin-bottom: 8px"
-                >12th Grade</strong
-              >
-              <span style="color: #9ca3af">Completed with distinction</span>
+        <!-- Skills Section -->
+        <section id="skills">
+            <h2><i class="fas fa-layer-group"></i> Skills & Technologies</h2>
+            <p class="section-subtitle">Tools and technologies I work with</p>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <i class="fab fa-html5"></i>
+                    <span>HTML5</span>
+                </div>
+                <div class="skill-card">
+                    <i class="fab fa-css3-alt"></i>
+                    <span>CSS3</span>
+                </div>
+                <div class="skill-card">
+                    <i class="fab fa-js"></i>
+                    <span>JavaScript</span>
+                </div>
+                <div class="skill-card">
+                    <i class="fab fa-python"></i>
+                    <span>Python</span>
+                </div>
+                <div class="skill-card">
+                    <i class="fas fa-bolt"></i>
+                    <span>FastAPI</span>
+                </div>
+                <div class="skill-card">
+                    <i class="fas fa-database"></i>
+                    <span>PostgreSQL</span>
+                </div>
+                <div class="skill-card">
+                    <i class="fas fa-book-open"></i>
+                    <span>ELS</span>
+                </div>
             </div>
-          </li>
-          <li>
-            <i class="fas fa-laptop-code"></i>
-            <div>
-              <strong
-                style="font-size: 18px; display: block; margin-bottom: 8px"
-                >Full-Stack Development Course</strong
-              >
-              <span style="color: #9ca3af"
-                >Freshworks STS Software Academy</span
-              >
-            </div>
-          </li>
-        </ul>
-      </section>
+        </section>
 
-      <!-- Contact Section -->
-      <section id="contact">
-        <h2><i class="fas fa-address-book"></i> Let's Connect</h2>
-        <p class="section-subtitle">
-          Feel free to reach out for collaborations or opportunities
-        </p>
-        <div class="contact-links">
-          <a href="mailto:your.email@example.com">
-            <i class="fas fa-envelope"></i>
-            Email Me
-          </a>
-          <a href="https://linkedin.com" target="_blank">
-            <i class="fab fa-linkedin"></i>
-            LinkedIn
-          </a>
-          <a href="https://github.com" target="_blank">
-            <i class="fab fa-github"></i>
-            GitHub
-          </a>
-        </div>
-      </section>
+        <!-- Projects Section -->
+        <section id="projects">
+            <h2><i class="fas fa-rocket"></i> Featured Projects</h2>
+            <p class="section-subtitle">Showcasing my recent work and accomplishments</p>
+            <div class="projects-grid">
+                <!-- Project 1: Ice Cream Campaign -->
+                <div class="project-card">
+                    <div class="project-image-container">
+                        <!-- ADD YOUR PROJECT PHOTO HERE -->
+                        <img src="./Screenshot 2026-01-07 091204.png" alt="Fresh Crush Ice Cream Campaign">
+                    </div>
+                    <div class="project-info">
+                        <h3>Fresh Crush Campaign</h3>
+                        <p>
+                            Designed and developed a vibrant summer season marketing campaign for Fresh Crush ice cream brand featuring creative visuals and promotional content.
+                        </p>
+                        <a href="#" class="project-link">
+                            <i class="fas fa-external-link-alt"></i>
+                            View Project
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 2: Static Website -->
+                <div class="project-card">
+                    <div class="project-image-container">
+                      <img src="./Screenshot 2026-01-07 091122.png" alt="Fresh Crush Ice Cream Campaign">
+                        <!-- Gradient placeholder - replace with actual project image -->
+                        <div style="width: 100%; height: 100%; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); display: flex; align-items: center; justify-content: center;">
+                            <i class="fas fa-shopping-cart" style="font-size: 80px; color: rgba(255,255,255,0.3);"></i>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <h3>Static Landing Page</h3>
+                        <p>
+                            Designed and developed a static landing page using HTML and CSS. Created clean layouts and user-friendly design focused on responsiveness and readability.
+                        </p>
+                        <a href="#" class="project-link">
+                            <i class="fas fa-code"></i>
+                            View Code
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ELS Life Skills Section -->
+        <section id="els">
+            <h2><i class="fas fa-users"></i> ELS Life Skills</h2>
+            <p class="section-subtitle">Team collaboration and learning experiences</p>
+            <div class="els-gallery">
+                <!-- ELS Squad Photo 1 -->
+                <div class="els-card">
+                    <div class="els-image-container">
+                        <!-- REPLACE WITH YOUR ELS TEAM PHOTO 1 -->
+                        <img src="./WhatsApp Image 2026-01-07 at 9.22.40 AM.jpeg" alt="ELS Squad Team">
+                    </div>
+                    <div class="els-info">
+                        <h3>ELS Squad Team</h3>
+                        <p>Working together on innovative projects at Freshworks Academy</p>
+                    </div>
+                </div>
+
+                <!-- ELS Squad Photo 2 -->
+                <div class="els-card">
+                    <div class="els-image-container">
+                        <!-- REPLACE WITH YOUR ELS TEAM PHOTO 2 -->
+                        <img src="./WhatsApp Image 2026-01-07 at 9.22.39 AM (1).jpeg" alt="ELS Team Collaboration">
+                    </div>
+                    <div class="els-info">
+                        <h3>Team Collaboration</h3>
+                        <p>Building skills through teamwork and shared learning</p>
+                    </div>
+                </div>
+
+                <!-- Your Individual Photo -->
+                <div class="els-card">
+                    <div class="els-image-container">
+                        <!-- REPLACE WITH YOUR INDIVIDUAL PHOTO -->
+                        <img src="./WhatsApp Image 2026-01-07 at 9.22.39 AM.jpeg" alt="Narayanan Project Presentation">
+                    </div>
+                    <div class="els-info">
+                        <h3>Project Presentation</h3>
+                        <p>Showcasing innovative solutions and creative work</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact">
+            <h2><i class="fas fa-address-book"></i> Let's Connect</h2>
+            <p class="section-subtitle">Feel free to reach out for collaborations or opportunities</p>
+            <div class="contact-links">
+                <a href="mailto:narayanan@example.com">
+                    <i class="fas fa-envelope"></i>
+                    Email Me
+                </a>
+                <a href="https://linkedin.com" target="_blank">
+                    <i class="fab fa-linkedin"></i>
+                    LinkedIn
+                </a>
+                <a href="https://github.com" target="_blank">
+                    <i class="fab fa-github"></i>
+                    GitHub
+                </a>
+            </div>
+        </section>
     </div>
-  </body>
+</body>
 </html>
